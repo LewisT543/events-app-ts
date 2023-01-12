@@ -1,9 +1,13 @@
-import Image from "next/image";
-import Link from "next/link";
+// This is used for SERVER SIDE GENERATION - it will create a static page for each permutation
 import CatEvent from "../../../src/components/events/cat-event";
 
-// This is used for SERVER SIDE GENERATION - it will create a static page for each permutation
-export async function getStaticProps(context: any) {
+export const EventsCatPage = ({data, pageName}: any) => {
+  return (
+    <CatEvent data={data} pageName={pageName}/>
+  )
+}
+
+export const getStaticProps = async (context: any) => {
   const {allEvents} = await import('../../../data/data.json')
   const id = context?.params.cat
   const data = allEvents.filter((ev: any) => ev.city === id)
@@ -15,7 +19,7 @@ export async function getStaticProps(context: any) {
   }
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
   const {events_categories} = await import('../../../data/data.json')
   const allPaths = events_categories.map((ev: any) => {
     return {params: {cat: ev.id.toString()}}
@@ -26,10 +30,4 @@ export async function getStaticPaths() {
   }
 }
 
-
-export default function EventsCatPage({data, pageName}: any) {
-  return (
-    <CatEvent data={data} pageName={pageName}/>
-  )
-}
-
+export default EventsCatPage

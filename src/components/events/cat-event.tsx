@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import imageLoader from "../../../imageLoader";
 
 const CatEvent = ({data, pageName}: any) => {
   return (
@@ -9,7 +10,7 @@ const CatEvent = ({data, pageName}: any) => {
       <div className="content">
         {data.map((ev: any) => (
           <Link className="card" key={ev.id} href={`/events/${ev.city}/${ev.id}`} passHref>
-            <Image width={300} height={300} alt={ev.title} src={ev.image}/>
+            <Image loader={imageLoader} unoptimized={true} width={300} height={300} alt={ev.title} src={ev.image}/>
             <h2> {ev.title} </h2>
             <p> {ev.description} </p>
           </Link>

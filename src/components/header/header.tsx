@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const Header = ({props}: any) => (
+export const Header = () => (
   <header>
     <div>
       <div className="topNav">
@@ -19,6 +19,11 @@ export const Header = ({props}: any) => (
             <li>
               <Link href="/about-us" passHref>
                 About us
+              </Link>
+            </li>
+            <li>
+              <Link href="/learn/rickAndMorty" passHref>
+                Rick And Morty
               </Link>
             </li>
           </ul>

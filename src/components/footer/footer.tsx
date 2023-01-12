@@ -1,5 +1,12 @@
+import Link from "next/link";
+
 export const Footer = () => (
   <footer>
-    <p>This is a footer</p>
+    <div>
+      <p>This is a footer</p>
+      <p>
+        <Link href={'/'}>Back to homepage</Link>
+      </p>
+    </div>
   </footer>
 )

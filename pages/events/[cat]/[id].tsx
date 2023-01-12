@@ -1,7 +1,10 @@
-import Image from "next/image";
 import SingleEvent from "../../../src/components/events/single-event";
 
-export async function getStaticProps(context: any) {
+export const EventPage = ({data}: any) => {
+  return <SingleEvent data={data}/>
+}
+
+export const getStaticProps = async (context: any) => {
   const {allEvents} = await import('../../../data/data.json')
   const contextId = context.params.id;
   const eventData = allEvents.find(ev => ev.id === contextId)
@@ -10,7 +13,7 @@ export async function getStaticProps(context: any) {
   }
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
   const {allEvents} = await import('../../../data/data.json')
   const allPaths = allEvents.map((ev) => {
     return {params: {cat: ev.city, id: ev.id}}
@@ -21,8 +24,4 @@ export async function getStaticPaths() {
   }
 }
 
-export const EventPage = ({data}: any) => {
-  <SingleEvent data={data}/>
-}
-
-export default EventPage;
+export default EventPage
