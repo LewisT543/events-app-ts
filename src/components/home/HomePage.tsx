@@ -7,7 +7,7 @@ export const HomePage = ({data}: any) => (
     {data?.map((ev: any) => (
       <Link className="card" key={ev.id} href={`/events/${ev.id}`}>
         <div className="image">
-          <Image loader={imageLoader} unoptimized={true} width={600} height={400} alt={ev.title} src={ev.image}/>
+          <Image loader={imageLoader} unoptimized={true} width={400} height={400} alt={ev.title} src={ev.image}/>
         </div>
         <div className="content">
           <h2> {ev.title} </h2>

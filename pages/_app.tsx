@@ -1,5 +1,5 @@
 import type {AppProps} from 'next/app'
-import {MainLayout} from "../src/components/layout/main-layout";
+import {MainLayout} from "../src/components/layout/MainLayout";
 import '../styles/general.sass'
 import '../styles/globals.css'
 

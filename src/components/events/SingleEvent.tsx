@@ -18,7 +18,7 @@ const SingleEvent = ({data}: any) => {
     const eventId = router?.query.id
 
     try {
-      const response = await fetch('/api/email-registration', {
+      const response: Response = await fetch('/api/email-registration', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

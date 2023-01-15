@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import {HomePage} from "../src/components/home/home-page";
+import {HomePage} from "../src/components/home/HomePage";
 
 // This is server side generation - use this when we need to RENDER AT RUNTIME
 export const getServerSideProps = async () => {

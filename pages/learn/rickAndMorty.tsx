@@ -1,8 +1,8 @@
 import {GetStaticProps, NextPage} from "next";
 import {Character, GetCharacterResults} from "../../types/rickAndMorty.types";
 import {useState} from "react";
-import {paginate} from "../../src/components/layout/pagination";
-import {PaginatedCharactersPage} from "../../src/components/rickandmorty/paginated-characters-page";
+import {paginate} from "../../src/components/layout/Pagination";
+import {PaginatedCharactersPage} from "../../src/components/rickandmorty/PaginatedCharactersPage";
 
 export const RickAndMorty: NextPage<{ characters: Character[] }> = ({characters}) => {
   const [currentPage, setCurrentPage] = useState(1)

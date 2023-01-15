@@ -26,10 +26,15 @@ export const Header = () => (
                 Rick And Morty
               </Link>
             </li>
+            <li>
+              <Link href="/dashboard" passHref>
+                Dashboard
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
-      <h1 className="title"> Sed ut perspiciatis unde omnis</h1>
+      <h1 className="title"> The Ultimate NextJs Playground</h1>
     </div>
   </header>
 )

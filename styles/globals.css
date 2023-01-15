@@ -18,17 +18,22 @@ a {
 
 @media (prefers-color-scheme: dark) {
     html {
-        color-scheme: dark;
+        color-scheme: light;
     }
 
     body {
         color: white;
-        background: black;
+        background: #1e445bad;
     }
 }
 
 .container {
     padding: 0 2rem;
+}
+
+.character-list-item {
+    text-align: center;
+    color: #eaeaea
 }
 
 .pagination {

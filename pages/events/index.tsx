@@ -1,4 +1,4 @@
-import AllEvents from "../../src/components/events/all-events";
+import AllEvents from "../../src/components/events/AllEvents";
 
 export const getStaticProps = async () => {
   const {events_categories} = await import('../../data/data.json')

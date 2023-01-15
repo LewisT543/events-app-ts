@@ -5,8 +5,9 @@ import imageLoader from "../../../imageLoader";
 
 export const characterToJsx = (character: Character): JSX.Element => {
   return (
-    <div key={character.id}>
-      <Link href={`/learn/characters/${character.id}`}>{character.name}
+    <div key={character.id} className={'character-list-item'}>
+      <Link href={`/learn/characters/${character.id}`}>
+        <h2>{character.name}</h2>
         <div>
           <Image
             loader={imageLoader}

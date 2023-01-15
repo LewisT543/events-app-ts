@@ -1,7 +1,7 @@
 import {GetServerSideProps} from "next";
 import {Character} from "../../../types/rickAndMorty.types";
 import {useRouter} from "next/router";
-import {SingleCharacterPage} from "../../../src/components/rickandmorty/single-character-page";
+import {SingleCharacterPage} from "../../../src/components/rickandmorty/SingleCharacterPage";
 
 export const CharacterPage = ({character}: { character: Character }) => {
   const router = useRouter()

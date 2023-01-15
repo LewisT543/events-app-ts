@@ -1,5 +1,5 @@
 import {Character, GetCharacterResults} from "../../../types/rickAndMorty.types";
-import {SingleCharacterPage} from "../../../src/components/rickandmorty/single-character-page";
+import {SingleCharacterPage} from "../../../src/components/rickandmorty/SingleCharacterPage";
 
 export const CharacterPage = ({character}: { character: Character }) => {
   return <SingleCharacterPage character={character}/>
