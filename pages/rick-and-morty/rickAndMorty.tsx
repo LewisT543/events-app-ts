@@ -1,10 +1,16 @@
 import {GetStaticProps, NextPage} from "next";
-import {Character, GetCharacterResults} from "../../types/rickAndMorty.types";
+import {Character, GetCharacterResults} from "../../src/lib/rickAndMorty/rickAndMorty.types";
 import {useState} from "react";
 import {paginate} from "../../src/components/layout/Pagination";
 import {PaginatedCharactersPage} from "../../src/components/rickandmorty/PaginatedCharactersPage";
+import {PropsAnd} from "../../src/lib/charts/utils.types";
 
-export const RickAndMorty: NextPage<{ characters: Character[] }> = ({characters}) => {
+interface RickAndMortyProps {
+  characters: Character[]
+}
+
+export const RickAndMorty: NextPage<RickAndMortyProps> = (props: RickAndMortyProps) => {
+  const {characters} = props
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 5
 
@@ -26,7 +32,7 @@ export const RickAndMorty: NextPage<{ characters: Character[] }> = ({characters}
   )
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async (): Promise<PropsAnd<RickAndMortyProps>> => {
   const res = await fetch("https://rickandmortyapi.com/api/character")
   const {results}: GetCharacterResults = await res.json()
 
@@ -37,5 +43,4 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-// @ts-ignore
 export default RickAndMorty

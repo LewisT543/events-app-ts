@@ -1,4 +1,4 @@
-import {PaginateInput, PaginationProps} from "../../../types/pagination.types";
+import {PaginateInput, PaginationProps} from "../../lib/pagination.types";
 
 export const paginate = ({items, pageNumber, pageSize}: PaginateInput): any[] => {
   const startIndex = (pageNumber - 1) * pageSize

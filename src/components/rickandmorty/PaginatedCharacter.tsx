@@ -1,4 +1,4 @@
-import {CanHavePagination, Character} from "../../../types/rickAndMorty.types";
+import {CanHavePagination, Character} from "../../lib/rickAndMorty/rickAndMorty.types";
 import Link from "next/link";
 import Image from "next/image";
 import imageLoader from "../../../imageLoader";

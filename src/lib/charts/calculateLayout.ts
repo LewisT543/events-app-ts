@@ -1,5 +1,5 @@
 import {Layout} from "react-grid-layout";
-import {ChartDetails} from "../../../types/charts.types";
+import {ChartDetails} from "./charts.types";
 
 export interface LayoutSizeTemplate {
   multiPanel: {

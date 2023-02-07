@@ -1,4 +1,4 @@
-import {Character, CanHavePagination} from "./rickAndMorty.types";
+import {Character, CanHavePagination} from "./rickAndMorty/rickAndMorty.types";
 
 export interface PaginationProps {
   numItems: number;

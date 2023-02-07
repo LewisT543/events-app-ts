@@ -17,8 +17,11 @@ export type DashboardItemAndSize = {
   [name in DashboardComponentName]: WidthAndHeight
 }
 
-export function toArray<T>(ts: T | T[] | undefined): T[] {
+export const toArray = <T>(ts: T | T[] | undefined): T[] => {
   if (ts === undefined) return []
   if (Array.isArray(ts)) return ts
   return [ts]
 }
+
+export const getRandomElement = (arr: any[]) =>
+  arr.length ? arr[Math.floor(Math.random() * arr.length)] : undefined

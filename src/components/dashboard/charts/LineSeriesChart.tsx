@@ -8,7 +8,7 @@ import {
   LineData,
   WhitespaceData
 } from "lightweight-charts";
-import {setClassName} from "../../../utils/stringManip";
+import {setClassName} from "../../../lib/charts/utils/stringManipulation";
 
 export interface LineSeriesChartProps {
   title?: string
@@ -23,7 +23,7 @@ export const LineSeriesChart = (props: LineSeriesChartProps) => {
   const chartRef = useRef() as MutableRefObject<HTMLDivElement>
   const chartName = setClassName('line-chart', className, classNameSuffix)
 
-  // console.log(`LineSeriesChart data: ${JSON.stringify(data)}`)
+  console.log(`LineSeriesChart data: ${JSON.stringify(data)}`)
 
   useEffect(() => {
     console.log(`LineSeriesChart otpions: ${JSON.stringify(options)}`)
@@ -34,7 +34,7 @@ export const LineSeriesChart = (props: LineSeriesChartProps) => {
     return () => {
       chart.remove()
     }
-  }, [])
+  }, [data, options])
 
   return (
     <div className={`${chartName}-title`}>

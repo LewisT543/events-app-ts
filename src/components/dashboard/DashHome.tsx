@@ -1,21 +1,21 @@
-interface DashHomeProps {
-  data: any[]
+import {MultiChartPanelResponsive} from "./layouts/MultiChartPanelResponsive";
+import {ChartDetails} from "../../lib/charts/charts.types";
+import {DashboardItemAndSize} from "../../lib/charts/utils.types";
+
+export interface DashHomeProps {
+  title?: string
+  chartDetails: ChartDetails[]
+  sizes: DashboardItemAndSize
 }
 
 export const DashHome = (props: DashHomeProps) => {
-  const {data} = props
-  // chartDetails should be generated based on:
-  // always display 8 - these can be empty or populated charts
-  // if more than 8, paginate it.
-
-  // or create a variableSized grid component (x: number, y: number)
+  const {title, chartDetails, sizes} = props
+  const {width, height} = sizes.MultiChartPanelResponsive
 
   return (
-    <div>
-      <h1>DashBoard</h1>
-      <div>
-        <h2>Dash Charts</h2>
-      </div>
+    <div className={'dashboard-container'} key={'panel-0'}>
+      <MultiChartPanelResponsive className={'multi-chart-panel'} title={title ? title : 'Dashboard Home'}
+                                 chartDetails={chartDetails} widthAndHeight={{totalWidth: width, totalHeight: height}}/>
     </div>
   )
 }

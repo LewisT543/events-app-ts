@@ -1,13 +1,13 @@
 import GridLayout, {Layout} from "react-grid-layout"
 import {calcGridLayout, getLayoutTemplate, LayoutSizeTemplate} from "../../../lib/charts/calculateLayout";
 import {LineSeriesChart} from "../charts/LineSeriesChart";
-import {ChartDetails} from "../../../../types/charts.types";
-import {setChartSize, setClassName} from "../../../utils/stringManip";
+import {ChartDetails} from "../../../lib/charts/charts.types";
+import {setChartSize, setClassName} from "../../../lib/charts/utils/stringManipulation";
 
-interface MultiChartPanelResponsiveProps {
+export interface MultiChartPanelResponsiveProps {
   title: string,
   chartDetails: ChartDetails[]
-  className: string
+  className?: string
   widthAndHeight: { totalWidth: number, totalHeight: number }
   classNameSuffix?: string
 }
@@ -24,7 +24,7 @@ export const MultiChartPanelResponsive = (props: MultiChartPanelResponsiveProps)
 
   const makeLineCharts = (details: ChartDetails[]): JSX.Element[] =>
     details.map((chartDetail: ChartDetails, index: number) => {
-      const clsName = setClassName(`line-series-chart`, chartDetail.className, chartDetail.classNameSuffix)
+      const clsName = setClassName(`line-series-chart`, chartDetail?.className, chartDetail?.classNameSuffix)
       return (
         <div key={`${index}`} className={`${clsName}-chart`}>
           <LineSeriesChart title={chartDetail?.title}
@@ -38,6 +38,8 @@ export const MultiChartPanelResponsive = (props: MultiChartPanelResponsiveProps)
   console.log(`MultiChartPanelResponsive layoutTemp: ${JSON.stringify(layoutSizes)}`)
 
   const allCharts = makeLineCharts(chartDetails)
+
+  console.log(`makeLineCharts produced: ${JSON.stringify(chartDetails)}`)
 
   return (
     <div className={classNameWithSuffix}>

@@ -1,4 +1,4 @@
-import {generateLineData, generateMockData} from "../../src/utils/generateMockData";
+import {generateLineData, generateMockData} from "../../src/lib/charts/utils/generateMockData";
 import {now} from "next-auth/client/_utils";
 
 

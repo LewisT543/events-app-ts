@@ -1,6 +1,6 @@
 import Image from "next/image";
 import imageLoader from "../../../imageLoader";
-import {Character} from "../../../types/rickAndMorty.types";
+import {Character} from "../../lib/rickAndMorty/rickAndMorty.types";
 import Link from "next/link";
 
 export const SingleCharacterPage = ({character}: { character: Character }) => {

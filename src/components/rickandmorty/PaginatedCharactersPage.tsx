@@ -1,5 +1,5 @@
 import Pagination from "../layout/Pagination";
-import {PaginatedPageProps} from "../../../types/pagination.types";
+import {PaginatedPageProps} from "../../lib/pagination.types";
 import {characterToJsx, PaginatedCharacter} from "./PaginatedCharacter";
 
 export const PaginatedCharactersPage = (props: PaginatedPageProps) => {

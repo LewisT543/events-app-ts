@@ -18,6 +18,6 @@ export interface ChartDetails {
   classNameSuffix?: string
 }
 
-type ChartType = 'Area' | 'Bar' | 'Baseline' | 'Candlestick' | 'Histogram' | 'Line'
-type ChartDataType = BarData | WhitespaceData | CandlestickData | SingleValueData | LineData | HistogramData
+export type ChartType = 'Area' | 'Bar' | 'Baseline' | 'Candlestick' | 'Histogram' | 'Line'
+export type ChartDataType = BarData | WhitespaceData | CandlestickData | SingleValueData | LineData | HistogramData
 

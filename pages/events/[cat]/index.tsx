@@ -1,6 +1,7 @@
 // This is used for SERVER SIDE GENERATION - it will create a static page for each permutation
 import CatEvent from "../../../src/components/events/CatEvent";
 
+
 export const EventsCatPage = ({data, pageName}: any) => {
   return (
     <CatEvent data={data} pageName={pageName}/>

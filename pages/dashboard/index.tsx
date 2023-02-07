@@ -1,54 +1,38 @@
-import {GetServerSideProps, GetStaticProps, NextPage} from "next";
+import {GetServerSideProps} from "next";
 import dynamic from "next/dynamic";
-import {ChartDetails} from "../../types/charts.types";
-import {setClassName} from "../../src/utils/stringManip";
-import {generateLineData} from "../../src/utils/generateMockData";
+import {generateLineChartDetails, generateLineData} from "../../src/lib/charts/utils/generateMockData";
 import {now} from "next-auth/client/_utils";
-import {DashboardItemAndSize, PropsAnd} from "../../types/utils.types";
+import {PropsAnd} from "../../src/lib/charts/utils.types";
+import {DashHomeProps} from "../../src/components/dashboard/DashHome";
 
-const MultiChartPanelResponsive = dynamic(
-  () => import("../../src/components/dashboard/layouts/MultiChartPanelResponsive").then((mod) => mod.MultiChartPanelResponsive), {
+const DashHome = dynamic(
+  () => import("../../src/components/dashboard/DashHome").then((mod) => mod.DashHome), {
     ssr: false
   })
 
 interface DashboardHomeProps {
-  title?: string
-  charts: ChartDetails[]
-  sizes: DashboardItemAndSize
+  multiChartDetails: DashHomeProps
 }
 
-export const DashboardHome: NextPage<DashboardHomeProps> = (props: DashboardHomeProps): JSX.Element => {
-  const {title, charts, sizes} = props
-
-  const {width, height} = sizes.MultiChartPanelResponsive
-
-  // console.log(`DashboardHomeProps Data: ${JSON.stringify(props)}`)
-
-  return (
-    <div className={'dashboard-container'} key={'panel-0'}>
-      <MultiChartPanelResponsive className={'multi-chart-panel'} title={title ? title : 'Dashboard Home'}
-                                 chartDetails={charts} widthAndHeight={{totalWidth: width, totalHeight: height}}/>
-    </div>
-  )
+export const DashboardHome = (props: DashboardHomeProps): JSX.Element => {
+  const {title, chartDetails, sizes} = props.multiChartDetails
+  return <DashHome title={title} chartDetails={chartDetails} sizes={sizes}/>
 }
 
 export const getServerSideProps: GetServerSideProps = async (): Promise<PropsAnd<DashboardHomeProps>> => {
   // get data from server on page load
   return {
     props: {
-      title: 'Server Generated Dashboard Name',
-      charts: [
-        {type: 'Line', data: generateLineData(new Date(now()), 'Daily', 20, {min: 10, max: 23, numDecimals: 2})},
-        {type: 'Line', data: generateLineData(new Date(now()), 'Weekly', 40, {min: 0, max: 230, numDecimals: 2})},
-        {type: 'Line', data: generateLineData(new Date(now()), 'Monthly', 28, {min: 35, max: 139, numDecimals: 2})},
-        {type: 'Line', data: generateLineData(new Date(now()), 'Daily', 105, {min: 10, max: 23, numDecimals: 2})}
-      ],
-      sizes: {
-        "MultiChartPanelResponsive": {
-          width: 500, height: 300
+      multiChartDetails: {
+        chartDetails: generateLineChartDetails(generateLineData, 8),
+        sizes: {
+          "MultiChartPanelResponsive": {
+            width: 1000, height: 600
+          }
         }
       }
     }
+
   }
 }
 

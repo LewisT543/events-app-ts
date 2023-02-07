@@ -1,9 +1,14 @@
-import {GetServerSideProps} from "next";
-import {Character} from "../../../types/rickAndMorty.types";
+import {GetServerSideProps, NextPage} from "next";
+import {Character} from "../../../src/lib/rickAndMorty/rickAndMorty.types";
 import {useRouter} from "next/router";
 import {SingleCharacterPage} from "../../../src/components/rickandmorty/SingleCharacterPage";
 
-export const CharacterPage = ({character}: { character: Character }) => {
+interface RAndMSingleCharPageProps {
+  character: Character
+}
+
+export const CharacterPage: NextPage<RAndMSingleCharPageProps> = (props: RAndMSingleCharPageProps) => {
+  const {character} = props
   const router = useRouter()
   console.log(router.query)
   return <SingleCharacterPage character={character}/>
