@@ -1,14 +1,17 @@
+@import "globals.css"
+@import "react-grid-layout.css"
+@import "react-resizable.css"
+
 ul
   list-style: none
 
 header
-  height: 300px
+  height: 250px
   background: linear-gradient(0deg, #66808f, black)
   padding: 15px 30px
 
   > div
     width: 100%
-    max-width: 1250px
     margin: auto
     display: flex
     flex-direction: column
@@ -43,10 +46,15 @@ footer
 
 main
   width: 100%
-  max-width: 1250px
   margin: auto
-  padding: 80px 30px
+  padding: 40px 30px
   min-height: 550px
+
+  .multi-chart-panel-charts
+    max-width: 100%
+
+    > div
+      padding: 5px
 
 .home_body
   display: flex
@@ -147,4 +155,3 @@ main
       &:hover
         color: #ff2929cf
         background: #333
-

@@ -32,7 +32,7 @@ export const makeApiPOSTRequest = async (url: string, query: AVQuery): Promise<R
   return await fetch(url, postRequest)
 }
 
-export const pickAGETRequest = (customReq?: AvRequestGET) =>
+export const makeGetReq = (customReq?: AvRequestGET) =>
   customReq !== undefined
     ? customReq
     : {
@@ -46,7 +46,7 @@ export const pickAGETRequest = (customReq?: AvRequestGET) =>
 
 export const getApikeyFromEnv = () => process.env.ALPHA_VANTAGE_API_KEY ? process.env.ALPHA_VANTAGE_API_KEY : 'ERROR'
 export const makeAvGetRequest = async (url: string, query: AVQuery, request?: AvRequestGET): Promise<Response> =>
-  await fetch(url, pickAGETRequest(request !== undefined ? request : undefined))
+  await fetch(url, makeGetReq(request !== undefined ? request : undefined))
 
 export const Example_Query: FundamentalsBalanceSheetQuery = {
   fn: AlphaVantageFundamentalsFnEnum.BALANCE_SHEET,

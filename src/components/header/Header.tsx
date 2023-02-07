@@ -22,7 +22,7 @@ export const Header = () => (
               </Link>
             </li>
             <li>
-              <Link href="/learn/rickAndMorty" passHref>
+              <Link href="/rick-and-morty/rickAndMorty" passHref>
                 Rick And Morty
               </Link>
             </li>

@@ -1,7 +1,12 @@
 import {Header} from "../header/Header";
 import {Footer} from "../footer/Footer";
 
-export const MainLayout = ({children}: any) => {
+interface MainLayoutProps {
+  children: JSX.Element
+}
+
+export const MainLayout = (props: MainLayoutProps) => {
+  const {children} = props
   return (
     <>
       <Header/>
