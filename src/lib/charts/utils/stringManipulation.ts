@@ -1,6 +1,6 @@
 import {ChartOptions, DeepPartial} from "lightweight-charts";
 
-export const setClassName = (defaultClassName: string, customClassName?: string, classNameSuffix?: string): string => {
+export const getClassName = (defaultClassName: string, customClassName?: string, classNameSuffix?: string): string => {
   if (customClassName !== undefined && classNameSuffix !== undefined) return customClassName + classNameSuffix
   if (customClassName !== undefined) return customClassName
   return defaultClassName

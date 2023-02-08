@@ -1,7 +1,8 @@
 import {LineData, UTCTimestamp} from "lightweight-charts";
-import {ChartDetails, ChartType} from "../charts.types";
 import {now} from "next-auth/client/_utils";
 import {getRandomElement} from "../utils.types";
+import {ChartProps} from "../../../components/dashboard/charts/TVChart";
+import {ChartDataType, ChartType} from "../../../components/dashboard/dashboard.types";
 
 type MockDataIncrement = 'Hourly' | 'Daily' | 'Weekly' | 'Monthly'
 
@@ -29,7 +30,6 @@ const getRandomNumberWithRangeOrDefault = (range?: MockDataRange): number => ran
 
 export const randomInt = (min: number, max: number): number => Math.floor(Math.random() * (max - min + 1)) + min
 
-
 const mockIncrementArr: MockDataIncrement[] = ["Hourly", "Daily", "Weekly", "Monthly"]
 
 const getIncrementAsMilliseconds = (increment: MockDataIncrement): number => {
@@ -52,7 +52,10 @@ interface GenerateLineDataParams {
   dataRange?: MockDataRange
 }
 
+type GeneratedMockParams = GenerateLineDataParams
+
 type GenerateMockDataFn = (params: GenerateLineDataParams) => LineData[]
+type GenerateMockParamsFn = () => GeneratedMockParams
 
 export const generateLineData = (params: GenerateLineDataParams): LineData[] => {
   const {startDate, increment, numPoints, dataRange} = params
@@ -70,11 +73,23 @@ export const getLineDataMockParams = (): GenerateLineDataParams => ({
   dataRange: {min: randomInt(10, 50), max: randomInt(51, 100), numDecimals: 2}
 })
 
-export const generateLineChartDetails = (mockDataFn: GenerateMockDataFn, numCharts: number): ChartDetails[] =>
-  Array(numCharts).fill(undefined).map(x => ({
+interface GenerateChartInput {
+  mockDataFn: GenerateMockDataFn,
+  type: ChartType,
+  mockParamsFn: GenerateMockParamsFn
+}
+
+export const generateLineChartProps = (mockDataFn: GenerateMockDataFn, charts: number): ChartProps[] =>
+  Array.from({length: charts}).map(x => ({
     type: 'Line' as ChartType,
-    data: mockDataFn(getLineDataMockParams())
+    data: mockDataFn(getLineDataMockParams()),
   }))
 
+
+export const generateChartProps = (genInputs: GenerateChartInput[]): ChartProps[] =>
+  genInputs.map(input => ({
+    type: input.type,
+    data: input.mockDataFn(input.mockParamsFn()),
+  }))
 
 

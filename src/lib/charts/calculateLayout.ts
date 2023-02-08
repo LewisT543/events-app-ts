@@ -1,5 +1,5 @@
 import {Layout} from "react-grid-layout";
-import {ChartDetails} from "./charts.types";
+import {ChartProps} from "../../components/dashboard/charts/TVChart";
 
 export interface LayoutSizeTemplate {
   multiPanel: {
@@ -20,8 +20,8 @@ interface XAndY {
   y: number
 }
 
-export const calcGridLayout = (chartDetails: ChartDetails[]): Layout[] =>
-  chartDetails.map((child: ChartDetails, index: number): Layout => {
+export const getGridLayout = (chartDetails: ChartProps[]): Layout[] =>
+  chartDetails.map((child: ChartProps, index: number): Layout => {
     const {x, y} = setXandY(index)
     return {i: index.toString(), x, y, w: 1, h: 1}
   })
@@ -45,6 +45,11 @@ export const getLayoutTemplate = (numChildren: number, totalWidth: number, total
     },
   }
 }
+
+export const getWidthAndHeight = (layoutSizes: LayoutSizeTemplate) => ({
+  width: layoutSizes.graph.width,
+  height: layoutSizes.graph.height
+})
 
 const setXandY = (index: number): XAndY => {
   if (index < 12) { // First 0-11                            // 12-23

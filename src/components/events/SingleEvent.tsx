@@ -7,7 +7,7 @@ const SingleEvent = ({data}: any) => {
 
   // this is the value entered into the email box in the form
   const inputEmail = useRef(null);
-  console.log(inputEmail)
+  // console.log(inputEmail)
   const router = useRouter()
 
   const onSubmit = async (e: any) => {

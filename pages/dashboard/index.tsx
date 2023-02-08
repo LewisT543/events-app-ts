@@ -1,7 +1,6 @@
 import {GetServerSideProps} from "next";
 import dynamic from "next/dynamic";
-import {generateLineChartDetails, generateLineData} from "../../src/lib/charts/utils/generateMockData";
-import {now} from "next-auth/client/_utils";
+import {generateLineChartProps, generateLineData} from "../../src/lib/charts/utils/generateMockData";
 import {PropsAnd} from "../../src/lib/charts/utils.types";
 import {DashHomeProps} from "../../src/components/dashboard/DashHome";
 
@@ -24,10 +23,10 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<PropsAnd
   return {
     props: {
       multiChartDetails: {
-        chartDetails: generateLineChartDetails(generateLineData, 8),
+        chartDetails: generateLineChartProps(generateLineData, 9),
         sizes: {
           "MultiChartPanelResponsive": {
-            width: 1000, height: 600
+            width: 900, height: 600
           }
         }
       }
