@@ -1,8 +1,9 @@
-import {LineData, UTCTimestamp} from "lightweight-charts";
+import {LineData, OhlcData, SingleValueData, UTCTimestamp} from "lightweight-charts";
 import {now} from "next-auth/client/_utils";
 import {getRandomElement} from "../utils.types";
 import {ChartProps} from "../../../components/dashboard/charts/TVChart";
 import {ChartDataType, ChartType} from "../../../components/dashboard/dashboard.types";
+import {OhlcTestDataNoTimes, IOhlcTestDataNoTimes} from "../../constants";
 
 type MockDataIncrement = 'Hourly' | 'Daily' | 'Weekly' | 'Monthly'
 
@@ -45,46 +46,54 @@ const getIncrementAsMilliseconds = (increment: MockDataIncrement): number => {
   }
 }
 
-interface GenerateLineDataParams {
+interface GenerateDataParams {
   startDate: Date
   increment: MockDataIncrement
-  numPoints: number
+  numPoints?: number
   dataRange?: MockDataRange
 }
 
-type GeneratedMockParams = GenerateLineDataParams
 
-type GenerateMockDataFn = (params: GenerateLineDataParams) => LineData[]
-type GenerateMockParamsFn = () => GeneratedMockParams
+type GenerateMockDataFn = SingleValueMockDataFn | OhlcMockDataFn
+type SingleValueMockDataFn = (params: GenerateDataParams) => SingleValueData[]
+type OhlcMockDataFn = (params: GenerateDataParams) => OhlcData[]
+type GenerateMockParamsFn = () => GenerateDataParams
 
-export const generateLineData = (params: GenerateLineDataParams): LineData[] => {
+export const generateSingleValueData: GenerateMockDataFn = (params: GenerateDataParams): LineData[] => {
   const {startDate, increment, numPoints, dataRange} = params
   if (dataRange && dataRange.min > dataRange.max) throw new Error(`Error: generateLineData min:${dataRange.min} > max:${dataRange.max}`)
-  return Array.from({length: numPoints}).map((x, index: number) => ({
+  return Array.from({length: numPoints ? numPoints : 12}).map((x, index: number) => ({
     time: (startDate.getTime() + (getIncrementAsMilliseconds(increment) * index) / 1000) as UTCTimestamp,
     value: getRandomNumberWithRangeOrDefault(dataRange)
   }))
 }
 
-export const getLineDataMockParams = (): GenerateLineDataParams => ({
+export const generateOhlcData: GenerateMockDataFn = (params: GenerateDataParams): OhlcData[] =>
+  OhlcTestDataNoTimes
+    .map((value: IOhlcTestDataNoTimes, index): OhlcData => ({
+      ...value, time: incrementTime(params.startDate, params.increment, index)
+    }))
+
+export const incrementTime = (startDate: Date, increment: MockDataIncrement, index: number): UTCTimestamp =>
+  (startDate.getTime() + (getIncrementAsMilliseconds(increment) * index) / 1000) as UTCTimestamp
+
+export const getSingleValueDataMockParams = (): GenerateDataParams => ({
   startDate: new Date(now()),
   increment: getRandomElement(mockIncrementArr),
   numPoints: randomInt(20, 100),
   dataRange: {min: randomInt(10, 50), max: randomInt(51, 100), numDecimals: 2}
 })
 
-interface GenerateChartInput {
-  mockDataFn: GenerateMockDataFn,
+export const getOhlcDataMockParams = (): GenerateDataParams => ({
+  startDate: new Date(now()),
+  increment: getRandomElement(mockIncrementArr),
+})
+
+export interface GenerateChartInput {
   type: ChartType,
+  mockDataFn: GenerateMockDataFn,
   mockParamsFn: GenerateMockParamsFn
 }
-
-export const generateLineChartProps = (mockDataFn: GenerateMockDataFn, charts: number): ChartProps[] =>
-  Array.from({length: charts}).map(x => ({
-    type: 'Line' as ChartType,
-    data: mockDataFn(getLineDataMockParams()),
-  }))
-
 
 export const generateChartProps = (genInputs: GenerateChartInput[]): ChartProps[] =>
   genInputs.map(input => ({

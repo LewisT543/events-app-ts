@@ -1,21 +1,18 @@
-import {DashboardItemAndSize} from "../../lib/charts/utils.types";
-import {ManyChartPanel} from "./layouts/ManyChartPanel";
-import {ChartProps} from "./charts/TVChart";
+import {ManyChartPanel, ManyChartPanelProps} from "./layouts/ManyChartPanel";
 
 export interface DashHomeProps {
   title?: string
-  chartDetails: ChartProps[]
-  sizes: DashboardItemAndSize
+  manyChartPanelProps: ManyChartPanelProps
 }
 
 export const DashHome = (props: DashHomeProps) => {
-  const {title, chartDetails, sizes} = props
-  const {width, height} = sizes.MultiChartPanelResponsive
+  const {title, chartProps, widthAndHeight} = props.manyChartPanelProps
+  const {width, height} = widthAndHeight
 
   return (
     <div className={'dashboard-container'} key={'panel-0'}>
       <ManyChartPanel className={'multi-chart-panel'} title={title ? title : 'Dashboard Home'}
-                      chartProps={chartDetails} widthAndHeight={{totalWidth: width, totalHeight: height}}/>
+                      chartProps={chartProps} widthAndHeight={{width, height}}/>
     </div>
   )
 }

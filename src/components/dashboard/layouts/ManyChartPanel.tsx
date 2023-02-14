@@ -14,17 +14,17 @@ export interface ManyChartPanelProps {
   title: string,
   chartProps: ChartProps[]
   className?: string
-  widthAndHeight: { totalWidth: number, totalHeight: number }
+  widthAndHeight: WidthAndHeight
   classNameSuffix?: string,
 }
 
 export const ManyChartPanel = (props: ManyChartPanelProps) => {
   const {title, chartProps, className, widthAndHeight, classNameSuffix} = props
   const classNameWithSuffix = getClassName('multi-chart-panel', className, classNameSuffix)
-  const {totalWidth, totalHeight} = widthAndHeight
 
+  const {width, height} = widthAndHeight
   const gridLayout: Layout[] = getGridLayout(chartProps)
-  const layoutSizes: LayoutSizeTemplate = getLayoutTemplate(chartProps.length, totalWidth, totalHeight)
+  const layoutSizes: LayoutSizeTemplate = getLayoutTemplate(chartProps.length, width, height)
   const eachChartSize: WidthAndHeight = getWidthAndHeight(layoutSizes)
 
   const allCharts = makeCharts(eachChartSize)(chartProps)

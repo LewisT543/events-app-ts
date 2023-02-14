@@ -2,27 +2,27 @@ import {BarData, CandlestickData, HistogramData, LineData, SingleValueData, Whit
 import {ChartProps} from "./charts/TVChart";
 
 export interface AreaChartProps extends ChartProps {
-  data: CandlestickData[]
+  data: (SingleValueData | WhitespaceData)[]
   type: 'Area'
 }
 
 export interface BarChartProps extends ChartProps {
-  data: CandlestickData[]
+  data: (BarData | WhitespaceData)[]
   type: 'Bar'
 }
 
 export interface BaselineChartProps extends ChartProps {
-  data: CandlestickData[]
+  data: (SingleValueData | WhitespaceData)[]
   type: 'Baseline'
 }
 
 export interface CandlestickChartProps extends ChartProps {
-  data: CandlestickData[]
+  data: (CandlestickData | WhitespaceData)[]
   type: 'Candlestick'
 }
 
 export interface HistogramChartProps extends ChartProps {
-  data: CandlestickData[]
+  data: (SingleValueData | WhitespaceData)[]
   type: 'Histogram'
 }
 
